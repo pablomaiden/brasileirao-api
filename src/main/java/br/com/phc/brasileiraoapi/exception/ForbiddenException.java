@@ -3,28 +3,27 @@ package br.com.phc.brasileiraoapi.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class BadRequestionException extends RuntimeException{
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
+public class ForbiddenException extends RuntimeException{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3890528352190562927L;
 		
-	public BadRequestionException() {
+	public ForbiddenException() {
 		super();				
 	}
 	
-	public BadRequestionException(String message) {
+	public ForbiddenException(String message) {
 		super(message);
 	}
 	
-	public BadRequestionException(Throwable cause) {
+	public ForbiddenException(Throwable cause) {
 		super(cause);
 	}
 	
-	public BadRequestionException(String message, Throwable cause) {
+	public ForbiddenException(String message, Throwable cause) {
 		super(message,cause);
 	}	
-	
 
 }

@@ -3,26 +3,26 @@ package br.com.phc.brasileiraoapi.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class BadRequestionException extends RuntimeException{
+@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+public class InternalServerException extends RuntimeException{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3890528352190562927L;
 		
-	public BadRequestionException() {
+	public InternalServerException() {
 		super();				
 	}
 	
-	public BadRequestionException(String message) {
+	public InternalServerException(String message) {
 		super(message);
 	}
 	
-	public BadRequestionException(Throwable cause) {
+	public InternalServerException(Throwable cause) {
 		super(cause);
 	}
 	
-	public BadRequestionException(String message, Throwable cause) {
+	public InternalServerException(String message, Throwable cause) {
 		super(message,cause);
 	}	
 	

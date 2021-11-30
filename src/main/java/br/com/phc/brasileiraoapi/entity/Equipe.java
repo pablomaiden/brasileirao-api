@@ -31,8 +31,10 @@ public class Equipe implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="nome_equipe")
 	private String nomeEquipe;
 	
+	@Column(name="url_logo_equipe")
 	private String urlLogoEquipe;
 	
 	
