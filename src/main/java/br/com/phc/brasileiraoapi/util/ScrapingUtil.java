@@ -20,12 +20,12 @@ public class ScrapingUtil {
 	private static final String NOME_TIME_CASA="div[class=imso_mh__first-tn-ed imso_mh__tnal-cont imso-tnol]";
 	private static final String NOME_TIME_VISITANTE="div[class=imso_mh__second-tn-ed imso_mh__tnal-cont imso-tnol]";
 	
-	public static void main(String[] args) {		
-		String url = BASE_URL_GOOGLE+"internacional+x+santos=28/11/2021"+COMPLEMENTO_GOOGLE;
-		
-		ScrapingUtil util = new ScrapingUtil();		
-		util.partidaGoogle(url);		
-	}
+	/*
+	 * public static void main(String[] args) { String url =
+	 * BASE_URL_GOOGLE+"internacional+x+santos=28/11/2021"+COMPLEMENTO_GOOGLE;
+	 * 
+	 * ScrapingUtil util = new ScrapingUtil(); util.partidaGoogle(url); }
+	 */
 	
 	public PartidaGoogleDTO partidaGoogle(String url) {
 		PartidaGoogleDTO dto = new PartidaGoogleDTO();		

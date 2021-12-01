@@ -13,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,37 +30,53 @@ import lombok.Setter;
 @Entity
 @Table(name="partida")
 public class Partida implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5296533622628774261L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "partida_id")
 	private Long id;
 	
-	@Column(name="status_partida")
+	@Transient
 	private String statusPartida;
 	
-	@Column(name="time_casa")
-	private String timeCasa;
-	
-	@Column(name="time_visitante")
-	private String timeVisitante;
-	
 	@ManyToOne
-	@JoinColumn(name="equipe_casa_id")
+	@JoinColumn(name = "equipe_casa_id")
 	private Equipe equipeCasa;
 	
 	@ManyToOne
-	@JoinColumn(name="equipe_visitante_id")
+	@JoinColumn(name = "equipe_visitante_id")
 	private Equipe equipeVisitante;
-		
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm", timezone="America/Sao_Paulo")
+	
+	@Column(name = "placar_equipe_casa")
+	private Integer placarEquipeCasa;
+	
+	@Column(name = "placar_equipe_visitante")
+	private Integer placarEquipeVisitante;
+	
+	@Column(name = "gols_equipe_casa")
+	private String golsEquipeCasa;
+	
+	@Column(name = "gols_equipe_visitante")
+	private String golsEquipeVisitante;
+	
+	@Column(name = "placar_estendido_equipe_casa")
+	private Integer placarEstendidoEquipeCasa;
+	
+	@Column(name = "placar_estendido_equipe_visitante")
+	private Integer placarEstendidoEquipeVisitante;
+	
+	@ApiModelProperty(example = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="data_hora_partida")
+	@Column(name = "data_hora_partida")
 	private Date dataHoraPartida;
+	
+	@Column(name = "local_partida")
+	private String localPartida;
+	
+	@Column(name = "tempo_partida")
+	private String tempoPartida;
 	
 	
 	
