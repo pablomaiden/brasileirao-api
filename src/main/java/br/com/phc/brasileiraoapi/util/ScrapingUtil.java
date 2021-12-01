@@ -27,6 +27,18 @@ public class ScrapingUtil {
 	 * ScrapingUtil util = new ScrapingUtil(); util.partidaGoogle(url); }
 	 */
 	
+	public String montaUrlGoogle(String nomeEquipeCasa, String nomeEquipeVisitante) {
+		try {
+			String equipeCasa = nomeEquipeCasa.replace(" ", "+").replace("-", "+");
+			String equipeVisitante = nomeEquipeVisitante.replace(" ", "+").replace("-", "+");
+
+			return BASE_URL_GOOGLE + equipeCasa + "+x+" + equipeVisitante + COMPLEMENTO_GOOGLE;
+		} catch (Exception e) {
+			LOGGER.error("ERRO: {}", e.getMessage());
+		}
+		return null;
+	}
+	
 	public PartidaGoogleDTO partidaGoogle(String url) {
 		PartidaGoogleDTO dto = new PartidaGoogleDTO();		
 		Document document = null;		
@@ -37,7 +49,7 @@ public class ScrapingUtil {
 						
 			StatusPartidasEnum statusPartida = obterStatusPartida(document);
 			LOGGER.info("Status Partida: {}",statusPartida.name());	
-			dto.setStatusPartida(statusPartida.name());
+			dto.setStatusPartida(statusPartida);
 			
 			if(statusPartida!= StatusPartidasEnum.PARTIDA_NAO_INICIADA) {
 			   String tempoPartida = tempoPartida(document);
@@ -132,21 +144,7 @@ public class ScrapingUtil {
 	
 	public static String obterPlacarTimeVisitante(Document document) {		
 		return document.selectFirst("div[class=imso_mh__r-tm-sc imso_mh__scr-it imso-light-font]").text();		
-	}
-	
-	private String montaUrlGoogle(String timeCasa, String timeVisitante) {
-		
-		
-		
-		return null;		
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 
 }

@@ -1,37 +1,37 @@
 package br.com.phc.brasileiraoapi.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.phc.brasileiraoapi.dto.EquipeResponseDTO;
-import br.com.phc.brasileiraoapi.entity.Equipe;
-import br.com.phc.brasileiraoapi.repository.EquipeRepository;
-import org.modelmapper.ModelMapper;
-import br.com.phc.brasileiraoapi.exception.NotFoundException;
+import br.com.phc.brasileiraoapi.dto.PartidaGoogleDTO;
+import br.com.phc.brasileiraoapi.entity.Partida;
+import br.com.phc.brasileiraoapi.util.ScrapingUtil;
+import br.com.phc.brasileiraoapi.util.StatusPartidasEnum;
 
 @Service
 public class ScrapingService {
 	
 	@Autowired
-	private EquipeRepository equipeRepository;
+	private ScrapingUtil scrapingUtil;
 	
 	@Autowired
-	private ModelMapper modelMapper;
+	private PartidaService partidaService;
 	
-	public Equipe buscarEquipeId(Long id) {
-		return equipeRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Nenhuma equipe encontrada com o id informado: " + id));
-	}
-	
-	public Equipe buscarEquipePorNome(String nomeEquipe) {
-		return equipeRepository.findByNomeEquipe(nomeEquipe)
-				.orElseThrow(() -> new NotFoundException("Nenhuma equipe encontrada com o nome informado: " + nomeEquipe));
-	}
-	
-	public EquipeResponseDTO listarEquipes() {
-		EquipeResponseDTO equipes = new EquipeResponseDTO();
-		equipes.setEquipes(equipeRepository.findAll());		
-		return equipes;
+	public void verificaPartidaPeriodo() {
+		Integer quantidadePartida = partidaService.buscarQuantidadePartidasPeriodo();
+		
+		if (quantidadePartida > 0) {
+			List<Partida> partidas = partidaService.listarPartidasPeriodo();
+			
+			partidas.forEach(partida -> {
+				String urlPartida = scrapingUtil.montaUrlGoogle(partida.getEquipeCasa().getNomeEquipe(),partida.getEquipeVisitante().getNomeEquipe());
+				PartidaGoogleDTO partidaGoogle = scrapingUtil.partidaGoogle(urlPartida);
+				
+				if (partidaGoogle.getStatusPartida() != StatusPartidasEnum.PARTIDA_NAO_INICIADA) {
+					//partidaService.atualizaPartida(partida, partidaGoogle);
+				}
+			});
+		}
 	}
 	
 
