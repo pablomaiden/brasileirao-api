@@ -7,9 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import br.com.phc.brasileiraoapi.dto.PartidaGoogleDTO;
 
+@Service
 public class ScrapingUtil {
 		
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScrapingUtil.class);
@@ -58,11 +60,11 @@ public class ScrapingUtil {
 			  			   
 			   String placarTimeCasa = obterPlacarTimeCasa(document);
 			   LOGGER.info(placarTimeCasa);
-			   dto.setGolsTimeCasa(Integer.parseInt(placarTimeCasa));
+			   dto.setGolsEquipeCasa(placarTimeCasa);
 				
 			   String placarTimeVisitante = obterPlacarTimeVisitante(document);
 			   LOGGER.info(placarTimeVisitante);
-			   dto.setGolsTimeVisitante(Integer.parseInt(placarTimeVisitante));			   
+			   dto.setGolsEquipeVisitante(placarTimeVisitante);			   
 			   
 			}			
 			

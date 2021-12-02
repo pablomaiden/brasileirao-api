@@ -47,6 +47,11 @@ public class EquipeService {
 		Equipe equipe = modelMapper.map(dto, Equipe.class);
 		equipe.setId(id);
 		equipeRepository.save(equipe);
-	}	
+	}
+	
+	public Equipe buscarEquipePorNome(String nomeEquipe) {
+		return equipeRepository.findByNomeEquipe(nomeEquipe)
+				.orElseThrow(() -> new NotFoundException("Nenhuma equipe encontrada com o nome informado: " + nomeEquipe));
+	}
 
 }

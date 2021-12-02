@@ -19,20 +19,18 @@ public class PartidaGoogleDTO implements Serializable{
 	private static final long serialVersionUID = 1563648995036816037L;
 	
 	private StatusPartidasEnum statusPartida;
-	private String tempoPartida;	
+	private String tempoPartida;
 	
-	//Dados Time Casa
 	private String nomeEquipeCasa;
 	private String urlLogoEquipeCasa;
-	private Integer placarTimeCasa;
-	private Integer golsTimeCasa;
-	private Integer placarEstendidoTimeCasa;
+	private Integer placarEquipeCasa;
+	private String golsEquipeCasa;
+	private Integer placarEstendidoEquipeCasa;
 	
-	//Dados Time Visitante
 	private String nomeEquipeVisitante;
 	private String urlLogoEquipeVisitante;
-	private Integer placarTimeVisitante;
-	private Integer golsTimeVisitante;
-	private Integer placarEstendidoTimeVisitante;
+	private Integer placarEquipeVisitante;
+	private String golsEquipeVisitante;
+	private Integer placarEstendidoEquipeVisitante;
 	
 }
