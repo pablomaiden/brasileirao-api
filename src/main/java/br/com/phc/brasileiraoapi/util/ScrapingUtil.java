@@ -1,14 +1,18 @@
 package br.com.phc.brasileiraoapi.util;
 
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import br.com.phc.brasileiraoapi.dto.PartidaGoogleDTO;
 
 @Service
@@ -21,13 +25,39 @@ public class ScrapingUtil {
 	private static final String TEMPO_PARTIDA="span[class=liveresults-sports-immersive__game-minute]";
 	private static final String NOME_TIME_CASA="div[class=imso_mh__first-tn-ed imso_mh__tnal-cont imso-tnol]";
 	private static final String NOME_TIME_VISITANTE="div[class=imso_mh__second-tn-ed imso_mh__tnal-cont imso-tnol]";
+		
+	static String username = "----username here------"; //blocked out here for obvious reasons
+	static String password = "----password here------";
+	static String loginUrl = "https://parents.mtsd.k12.nj.us/genesis/parents/j_security_check";
+	static String userDataUrl = "https://parents.mtsd.k12.nj.us/genesis/parents?module=gradebook";
 	
-	/*
-	 * public static void main(String[] args) { String url =
-	 * BASE_URL_GOOGLE+"internacional+x+santos=28/11/2021"+COMPLEMENTO_GOOGLE;
-	 * 
-	 * ScrapingUtil util = new ScrapingUtil(); util.partidaGoogle(url); }
-	 */
+	private static WebDriver driver;
+	private static Map<String, Object> vars;
+	private static JavascriptExecutor js;
+	
+	public void teste() {		
+		System.setProperty("webdriver.chrome.driver", "src/test/java/chromedriver.exe");		
+		driver = new ChromeDriver();
+		js     = (JavascriptExecutor) driver;
+		vars   = new HashMap<String, Object>();	
+				
+		try {
+			driver.get("https://www.situacao-cadastral.com");			
+			Thread.sleep(1000);
+			driver.findElement(By.id("doc")).sendKeys("91966078153");			
+			Thread.sleep(5000);
+			driver.findElement(By.id("consultar")).click();
+			Thread.sleep(5000);				
+		} catch (InterruptedException e) {			
+			e.printStackTrace();
+		}				
+	}
+	  
+	public static void checkElement(String name, Element elem) {
+	      if (elem == null) {
+	          throw new RuntimeException("Unable to find " + name);
+	    }
+	}	 
 	
 	public String montaUrlGoogle(String nomeEquipeCasa, String nomeEquipeVisitante) {
 		try {
@@ -65,7 +95,6 @@ public class ScrapingUtil {
 			   String placarTimeVisitante = obterPlacarTimeVisitante(document);
 			   LOGGER.info(placarTimeVisitante);
 			   dto.setGolsEquipeVisitante(placarTimeVisitante);			   
-			   
 			}			
 			
 			String nomeEquipeCasa = obterNomeTime(document,NOME_TIME_CASA);

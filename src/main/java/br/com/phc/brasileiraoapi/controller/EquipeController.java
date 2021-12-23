@@ -19,6 +19,7 @@ import br.com.phc.brasileiraoapi.dto.EquipeDTO;
 import br.com.phc.brasileiraoapi.dto.EquipeResponseDTO;
 import br.com.phc.brasileiraoapi.entity.Equipe;
 import br.com.phc.brasileiraoapi.service.EquipeService;
+import br.com.phc.brasileiraoapi.util.ScrapingUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import br.com.phc.brasileiraoapi.exception.StandartError;
@@ -32,6 +33,9 @@ public class EquipeController {
 	
 	@Autowired
 	private EquipeService equipeService;
+	
+	@Autowired
+	private ScrapingUtil scrapingUtil;
 	
 	@ApiOperation(value = "Buscar equipe por id")
 	@ApiResponses(value = {
@@ -93,6 +97,11 @@ public class EquipeController {
 			@Valid @RequestBody EquipeDTO dto) {
 		equipeService.alterarEquipe(id, dto);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/teste")
+	public void teste() {		
+		scrapingUtil.teste();		
 	}
 	
 

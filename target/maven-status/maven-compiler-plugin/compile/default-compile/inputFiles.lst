@@ -9,6 +9,7 @@ C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\b
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\util\StatusPartidasEnum.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\config\ModelMapperConfig.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\controller\EquipeController.java
+C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\task\package-info.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\exception\NotFoundException.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\exception\ResourceExceptionHandler.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\service\PartidaService.java
@@ -19,7 +20,9 @@ C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\b
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\repository\EquipeRepository.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\exception\InternalServerException.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\entity\Equipe.java
+C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\util\DataUtil.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\service\ScrapingService.java
+C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\task\PartidaTask.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\exception\BadRequestionException.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\service\EquipeService.java
 C:\Projetos\worskpace\brasileirao_api\brasileirao-api\src\main\java\br\com\phc\brasileiraoapi\exception\ForbiddenException.java

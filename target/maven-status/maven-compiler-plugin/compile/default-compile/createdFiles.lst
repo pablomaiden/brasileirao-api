@@ -6,6 +6,7 @@ br\com\phc\brasileiraoapi\exception\BadRequestionException.class
 br\com\phc\brasileiraoapi\exception\UnathorizedException.class
 br\com\phc\brasileiraoapi\BrasileiraoApiApplication.class
 br\com\phc\brasileiraoapi\dto\PartidaGoogleDTO.class
+br\com\phc\brasileiraoapi\dto\EquipeDTO.class
 br\com\phc\brasileiraoapi\repository\PartidaRepository.class
 br\com\phc\brasileiraoapi\config\ModelMapperConfig.class
 br\com\phc\brasileiraoapi\service\EquipeService.class
@@ -21,5 +22,8 @@ br\com\phc\brasileiraoapi\exception\NotFoundException.class
 br\com\phc\brasileiraoapi\exception\StandartError.class
 br\com\phc\brasileiraoapi\controller\PartidaController.class
 br\com\phc\brasileiraoapi\service\ScrapingService.class
+br\com\phc\brasileiraoapi\task\PartidaTask.class
+br\com\phc\brasileiraoapi\util\DataUtil.class
 br\com\phc\brasileiraoapi\util\ScrapingUtil.class
+br\com\phc\brasileiraoapi\dto\PartidaDTO.class
 br\com\phc\brasileiraoapi\dto\PartidaResponseDTO.class
