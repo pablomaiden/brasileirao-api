@@ -1,15 +1,22 @@
 package br.com.phc.brasileiraoapi.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -42,15 +49,44 @@ public class ScrapingUtil {
 		vars   = new HashMap<String, Object>();	
 				
 		try {
-			driver.get("https://www.situacao-cadastral.com");			
-			Thread.sleep(1000);
-			driver.findElement(By.id("doc")).sendKeys("91966078153");			
-			Thread.sleep(5000);
-			driver.findElement(By.id("consultar")).click();
-			Thread.sleep(5000);				
-		} catch (InterruptedException e) {			
+			driver.get("https://www.situacao-cadastral.com");						
+			List<String> cpfs = new ArrayList<String>(); 
+			
+			cpfs.add("91966078153");	
+			cpfs.add("32785950410");
+			cpfs.add("29322693487");
+			cpfs.add("67046070482");
+			
+			for(String cpf : cpfs) {				
+				if(waitForPageLoad()) {
+				   driver.findElement(By.id("doc")).sendKeys(cpf);
+				   driver.findElement(By.id("consultar")).click();				
+				}
+				
+				if(waitForPageLoad()) {
+				   WebElement resultado = driver.findElement(By.className("vrd"));
+				   String resultado_    = resultado.getText();
+				   System.out.println(resultado_);					
+				}				
+					
+				if(waitForPageLoad())
+				   driver.findElement(By.id("btnVoltar")).click();				
+			}			
+			
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}				
+	}
+	
+	public Boolean waitForPageLoad() {
+	    Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+	    Boolean retorno = wait.until(new Function<WebDriver, Boolean>() {
+	        public Boolean apply(WebDriver driver) {
+	            System.out.println("Current Window State : " + String.valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState")));
+	            return String.valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState")).equals("complete");
+	        }
+	    });
+	    return retorno;
 	}
 	  
 	public static void checkElement(String name, Element elem) {
