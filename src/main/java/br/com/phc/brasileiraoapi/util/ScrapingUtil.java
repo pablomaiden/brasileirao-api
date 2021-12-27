@@ -12,9 +12,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -52,31 +54,52 @@ public class ScrapingUtil {
 			driver.get("https://www.situacao-cadastral.com");						
 			List<String> cpfs = new ArrayList<String>(); 
 			
-			cpfs.add("91966078153");	
-			cpfs.add("32785950410");
-			cpfs.add("29322693487");
+			//cpfs.add("91966078153");	
+			//cpfs.add("32785950410");
+			//cpfs.add("29322693487");
 			cpfs.add("67046070482");
 			
 			for(String cpf : cpfs) {				
 				if(waitForPageLoad()) {
-				   driver.findElement(By.id("doc")).sendKeys(cpf);
-				   driver.findElement(By.id("consultar")).click();				
+					
+					if(isElementPresent(By.id("doc"))) {
+					   driver.findElement(By.id("doc")).sendKeys(cpf);
+					   driver.findElement(By.id("consultar")).click();						
+					}				   				
 				}
 				
-				if(waitForPageLoad()) {
-				   WebElement resultado = driver.findElement(By.className("vrd"));
-				   String resultado_    = resultado.getText();
-				   System.out.println(resultado_);					
-				}				
+				if(waitForPageLoad()) { 					
+					if(isElementPresent(By.className("vrd"))) {					   
+					   WebElement resultado = driver.findElement(By.className("vrd"));
+					   String resultado_    = resultado.getText();
+					   System.out.println(resultado_);				   
+						   }			   				   				   				
+				      }				
 					
-				if(waitForPageLoad())
-				   driver.findElement(By.id("btnVoltar")).click();				
-			}			
+				if(waitForPageLoad()) {
+					if(isElementPresent(By.id("btnVoltar"))) {
+						driver.findElement(By.id("btnVoltar")).click();						
+					}
+				}				   				
+			}
+			
+			driver.close();
+			driver.quit();
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}				
 	}
+	
+	private boolean isElementPresent(By by){
+        try{
+            driver.findElement(by);
+            return true;
+        }
+        catch(NoSuchElementException e){
+            return false;
+        }
+    }
 	
 	public Boolean waitForPageLoad() {
 	    Wait<WebDriver> wait = new WebDriverWait(driver, 30);
