@@ -13,8 +13,7 @@ import br.com.phc.brasileiraoapi.util.DataUtil;
 @Configuration
 @EnableScheduling
 public class PartidaTask {
-	
-	
+		
 	private static final Logger LOGGER = LoggerFactory.getLogger(PartidaTask.class);
 	private static final String TIME_ZONE = "America/Sao_Paulo";
 	private static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss";
@@ -49,8 +48,7 @@ public class PartidaTask {
 	}
 	
 	private void inicializaAgendamento(String diaSemana) {
-		this.gravaLogInfo(String.format("%s: %s", diaSemana, DataUtil.formataDateEmString(new Date(), DD_MM_YYYY_HH_MM_SS)));
-		
+		this.gravaLogInfo(String.format("%s: %s", diaSemana, DataUtil.formataDateEmString(new Date(), DD_MM_YYYY_HH_MM_SS)));		
 		scrapingService.verificaPartidaPeriodo();
 	}
 	
